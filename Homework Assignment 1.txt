@@ -1,0 +1,40 @@
+1. Write a C++ program to check whether a given number is a palindrome or not.
+
+2. C++ program to print all the Repeated Numbers with Frequency in an Array.
+
+3. WAP to print even numbers in a given range in reverse order.
+Take the range from the user.
+
+4. Write a program to calculate the sum of series up to n terms for a digit d.
+n & d are taken as input from the user.
+For example:
+    Input: n = 5, d = 2
+    Logic: 2 + 22 + 222 + 2222 + 22222 
+    Output: 24690
+
+5. Write a program to find the digits which are absent in a given mobile number.
+   For example: Input : 9354328855
+                Output: 0167
+
+6. WAP in program which accepts string from the user and
+displays only those characters/elements which are present at an even index.
+Example: 
+    Input: "Python"
+    Output: Pto
+
+7. WAP to make an array of all the characters starting from character 'A'
+to input charaacter from the user.
+For e.g. Input: 'H'
+        Output: ("A", "B", "C", "D", "E", "F", "G", "H")
+
+8. Write a python program to find the intersection of elements from two arrays
+(find the common elements in two lists).
+
+9. WAP to reverse a given integer number.
+Example: Input: 105320
+        Output: 023501
+
+10. WAP to concatenate elements of two arrays in the following order:
+    a1 = ("Hello ", "World")
+    a2 = ("Hi", "There")
+    Output: ('Hello Hi', 'Hello There', 'World Hi', 'World There')

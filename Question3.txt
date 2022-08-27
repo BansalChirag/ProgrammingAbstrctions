@@ -1,0 +1,11 @@
+Design a class Employee with the where you the details about the employment & performance is required to be maintained and you may
+use following tentative(you may improve on same) specifications as mentioned:
+
+Private members of class Employee
+Variables: Employee number, Employee name, years of experience, performance parameters(punctual, task completion rate, on time submissions with 100 marks for each), totalGrades
+Functions: calculatetotal() where the total performance parameter grades as well as percentage can be calculated.
+
+Public member function of class student
+Takedata(): for user inputs
+Showdata():to display all the data on the screen.
+The number of employees will be entered by the user itself and you may maintain an array of object for same.
