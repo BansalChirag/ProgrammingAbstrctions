@@ -46,7 +46,7 @@ ostream & operator >>(ostream &dout,vector &b){
          vector n =x;
          cout<<"Enter the elements of vector m"<<"\n";
          cin>>m;
-         cout<<"\nm:"<<m<<"\n";
+        //  cout<<"\nm:"<<m<<"\n";
          vector p,q;
          p=2+m;
          q=m+2;
