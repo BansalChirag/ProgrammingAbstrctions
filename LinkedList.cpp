@@ -446,21 +446,21 @@ Node* addOne(Node *head) {
 // -------------------------------- move zeroes to front ----------------------------------------- ///
 
 
-void moveZeroes(struct Node **head){
-    Node*current = (*head)->next;
-    Node*prev = *head;
-    while(current!=NULL){
-        if(current->data == 0){
-            prev->next = current->next;
-            current->next = *head;
-            *head = current;
-            current = prev->next;
-        }else{
-            prev = prev->next;
-            current = current->next;
-        }
-    }
-}
+// void moveZeroes(struct Node **head){
+//     Node*current = (*head)->next;
+//     Node*prev = *head;
+//     while(current!=NULL){
+//         if(current->data == 0){
+//             prev->next = current->next;
+//             current->next = *head;
+//             *head = current;
+//             current = prev->next;
+//         }else{
+//             prev = prev->next;
+//             current = current->next;
+//         }
+//     }
+// }
 
 
 // -------------------------------- Insert in a sorted linked list ----------------------------------------- ///
