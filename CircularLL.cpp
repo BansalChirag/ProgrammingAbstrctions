@@ -11,6 +11,18 @@ class Node{
     }
 };
 
+
+int len(Node *head){
+    int cnt = 0;
+    Node * temp = head;
+    while(temp!=NULL){
+        temp = temp->next;
+        cnt++;
+    }
+    return cnt;
+}
+
+
 void insertAthead(Node*&head,int val){
     Node *n = new Node(val);
     if(head == NULL){
@@ -93,6 +105,10 @@ void splitList(Node *head, Node **head1_ref, Node **head2_ref){
     }
     curr->next = *head2_ref;
 }
+
+
+
+
 
 
 
