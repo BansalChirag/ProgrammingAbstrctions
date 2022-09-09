@@ -12,6 +12,8 @@ class Node{
     }
 };
 
+// -------------------------------- searching element in Linked List ----------------------------------------- ///
+
 
 int search(Node*head,int val){
     Node * temp = head;
@@ -28,6 +30,7 @@ int search(Node*head,int val){
 }
 
 
+// -------------------------------- length of Linked List using recursion ----------------------------------------- ///
 int len_reccur(Node *head){
     if(head==NULL){
         return 0;
@@ -35,6 +38,21 @@ int len_reccur(Node *head){
 
     return (len_reccur(head->next) + 1);
 }
+
+
+// -------------------------------- length of Linked List using iterative method ----------------------------------------- ///
+
+int len(Node *head){
+    int cnt = 0;
+    Node * temp = head;
+    while(temp!=NULL){
+        temp = temp->next;
+        cnt++;
+    }
+    return cnt;
+}
+
+// -------------------------------- length of Linked List using recursion ----------------------------------------- ///
 
 int getithNode(Node * head,int i){
     Node * temp = head;
@@ -46,6 +64,8 @@ int getithNode(Node * head,int i){
     return temp->data;
 }
 
+
+// -------------------------------- insertion at the end of linked list ----------------------------------------- ///
 
 void insertAtTail(Node* &head,int d){
     Node *n = new Node(d);
@@ -82,6 +102,8 @@ void insertAtTail(Node* &head,int d){
 // }
 
 
+// -------------------------------- insertion at the head of linked list ----------------------------------------- ///
+
 void insertAtHead(Node * head,int d){
     if(head==NULL){
         Node * n = new Node(d);
@@ -92,6 +114,8 @@ void insertAtHead(Node * head,int d){
     n->next = head;
     head = n;
 }
+
+// -------------------------------- insertion at the specific position of linked list ----------------------------------------- ///
 
 void insertAtSpecificPosition(Node*&head,int d,int pos){
     Node * n = new Node(d);
@@ -118,45 +142,26 @@ void insertAtSpecificPosition(Node*&head,int d,int pos){
 
 
 
-Node *moveToFront(Node *head){
-    if(head == NULL || head->next == NULL){
-        return head;
-    }
-    Node * temp = head;
-    while(temp->next->next!=NULL){
-        temp = temp->next;
-    }
-    Node * toMove = temp->next;
-    toMove->next = NULL;
-    temp->next = temp->next->next;
-    toMove->next = head;
-    head = toMove;
-    return toMove;
-}
+// Node *moveToFront(Node *head){
+//     if(head == NULL || head->next == NULL){
+//         return head;
+//     }
+//     Node * temp = head;
+//     while(temp->next->next!=NULL){
+//         temp = temp->next;
+//     }
+//     Node * toMove = temp->next;
+//     toMove->next = NULL;
+//     temp->next = temp->next->next;
+//     toMove->next = head;
+//     head = toMove;
+//     return toMove;
+// }
 
 
-Node *reverseRecursive(Node *&head){
-    if(head == NULL || head->next == NULL){
-        return head;
-    }
-    Node * newhead = reverseRecursive(head->next);
-    head->next->next = head;
-    head->next = NULL;
-    return newhead;
-}
 
-void insert_recursion(Node * head,int d,int pos){
-    if(head == NULL){
-        return;
-    }
-    if(pos == 0){
-        Node * n = new Node(d);
-        n->next = head->next->next;
-        head->next = n;
-        head = n;
-    }
-    insert_recursion(head->next,d,pos-1);
-}
+// -------------------------------- delete from specific position in linked list ----------------------------------------- ///
+
 
 void deleteFromSpecificPosition(Node* &head,int pos){
     if(head == NULL){
@@ -185,6 +190,158 @@ void deleteFromSpecificPosition(Node* &head,int pos){
 }
 
 
+
+
+
+
+// -------------------------------- Finding intersection linked list of two sorted linked list  ----------------------------------------- ///
+
+
+
+Node* findIntersection(Node* head1, Node* head2){   // two sorted LL
+    Node * ILL = NULL;
+    if(head1 == NULL || head2 == NULL){
+        return NULL;
+    }
+    Node *temp1 = head1,*temp2 = head2;
+    while(temp1!=NULL && temp2!=NULL){
+        if(temp1->data == temp2->data){
+            insertAtTail(ILL,temp1->data);
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }else if(temp1->data<temp2->data){
+            temp1 = temp1->next;
+        }else{
+            temp2 = temp2->next;
+        }
+    }
+    return ILL;
+}
+
+// -------------------------------- finding intersection of two linked list  ----------------------------------------- ///
+
+int intersectPoint(Node* head1, Node* head2){
+    int l1 = len(head1),l2 = len(head2);
+    int d = 0;
+    Node * ptr1 = NULL,*ptr2 = NULL;
+    if(l1>l2){
+        d = l1-l2;
+        ptr1 = head1;
+        ptr2 = head2;
+    }else{
+        d = l2-l1;
+        ptr1 = head2;
+        ptr2 = head1;
+    }
+    while(d--){
+        ptr1 = ptr1->next;
+        if(ptr1 == NULL){
+            return -1;
+        }
+    }
+    while(ptr1!=NULL && ptr2!=NULL){
+        if(ptr1 == ptr2){
+            return ptr1->data;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    return -1;
+}
+
+
+// -------------------------------- Reverse a linked list using recursion ----------------------------------------- ///
+
+Node *reverseRecursive(Node *&head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    Node * newhead = reverseRecursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newhead;
+}
+
+// -------------------------------- Reverse a linked list using iteration ----------------------------------------- ///
+
+Node * reversingLinkedList(Node *&head){
+    Node * current = head;
+    Node * nextPtr = NULL;
+    Node * prev = NULL;
+    while(current!=NULL){
+        nextPtr = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextPtr;
+    }
+    return prev;
+}
+
+
+// -------------------------------- Sorting Zero one two linked list ----------------------------------------- ///
+
+Node* Zero12(Node*head){
+    int cnt0 = 0,cnt1 = 0,cnt2 = 0;
+        Node * temp = head;
+        while(temp!=NULL){
+            if(temp->data == 0){
+                cnt0++;
+            }else if(temp->data == 1){
+                cnt1++;
+            }else {
+                cnt2++;
+            }
+            temp = temp->next;
+        }
+        temp = head;
+        while(cnt0>0){
+            temp->data = 0;
+            temp = temp->next;
+            cnt0--;
+        }
+        while(cnt1>0){
+            temp->data = 1;
+            temp = temp->next;
+            cnt1--;
+        }
+        while(cnt2>0){
+            temp->data = 2;
+            temp = temp->next;
+            cnt2--;
+        }
+        
+        return head;
+}
+
+
+void deleteAlt(struct Node *head){
+   Node* temp=head;
+   while(temp!=NULL){
+       if(temp->next!=NULL){
+           temp->next=temp->next->next;
+       }
+       temp=temp->next;
+   }
+}
+
+// void insert_recursion(Node * head,int d,int pos){
+//     if(head == NULL){
+//         return;
+//     }
+//     if(pos == 0){
+//         Node * n = new Node(d);
+//         n->next = head->next->next;
+//         head->next = n;
+//         head = n;
+//     }
+//     insert_recursion(head->next,d,pos-1);
+// }
+
+
+
+
+// -------------------------------- get middle element ----------------------------------------- ///
+
 int getMiddle(Node * head){
     if(head == NULL ){
         return -1;
@@ -201,42 +358,33 @@ int getMiddle(Node * head){
 }
 
 
-Node * reversingLinkedList(Node *&head){
-    Node * current = head;
-    Node * nextPtr = NULL;
-    Node * prev = NULL;
-    while(current!=NULL){
-        nextPtr = current->next;
-        current->next = prev;
-        prev = current;
-        current = nextPtr;
+// -------------------------------- Delete nodes having bigger right value in a linked list  ----------------------------------------- ///
+
+Node *DeleteNodesWithBigRIghtValue(Node *head){
+    head = reversingLinkedList(head);
+    Node * prev = head;
+    Node * curr = head;
+    int ma = head->data;
+    while(head){
+        if(head->data>=ma){
+            ma = head->data;
+            prev = head;
+            head = head->next;
+        }else{
+            Node * todelete = prev->next;
+            prev->next = head->next;
+            head = prev->next;  
+            delete todelete;
+        }
     }
-    return prev;
+    head = reversingLinkedList(curr);
+    return head;
 }
 
-// Node* EvenAfterOdd(Node*&head){
-//     vector<int> even;
-//     vector<int> odd;
-//     Node * temp = head;
-//     while(temp!=NULL){
-//         if((temp->data) % 2 == 0){
-//             even.push_back(temp->data);
-//         }else{
-//             odd.push_back(temp->data);
-//         }
-//         temp = temp->next;
-//     }
-//     // return head;
-//     Node * new_head = NULL;
-//     for(int i = 0;i<odd.size();i++){
-//         insertAtTail(new_head,odd[i]);
-//     }
-//     for(int i = 0;i<even.size();i++){
-//         insertAtTail(new_head,even[i]);    
-//     }
-//     return new_head;
-// }
 
+
+
+// -------------------------------- Even after odd linked list ----------------------------------------- ///
 Node* EvenAfterOdd(Node*&head){
     Node *odd_head = NULL,*even_head = NULL,*odd_tail = NULL,*even_tail = NULL;
     while(head){
@@ -269,6 +417,35 @@ Node* EvenAfterOdd(Node*&head){
 
 
 
+
+
+// -------------------------------- adding one to a linked list  ----------------------------------------- ///
+
+Node* addOne(Node *head) {
+        if(head->next == NULL){
+            head->data = 1 + head->data;
+            return head;
+        }
+        head = reversingLinkedList(head);
+        Node * temp = head;
+        int carry = 1,sum = 0;
+        Node * x = temp;
+        while(temp->next!=NULL){
+            sum = carry + temp->data;
+            carry = (sum>=10) ? 1 : 0;
+            temp->data = sum % 10;
+            temp = temp->next;
+        }
+        if(temp->next == NULL){
+            temp->data = carry + temp->data;
+        }
+        head = reversingLinkedList(x);
+        return head;
+    }
+
+// -------------------------------- move zeroes to front ----------------------------------------- ///
+
+
 void moveZeroes(struct Node **head){
     Node*current = (*head)->next;
     Node*prev = *head;
@@ -284,6 +461,9 @@ void moveZeroes(struct Node **head){
         }
     }
 }
+
+
+// -------------------------------- Insert in a sorted linked list ----------------------------------------- ///
 
 
 Node *sortedInsert(struct Node* head, int val) {
@@ -312,21 +492,21 @@ Node *sortedInsert(struct Node* head, int val) {
 }
 
 
+// -------------------------------- delete without head pointer ----------------------------------------- ///
 
-void deleteNode(Node *del)
-    {
-        if(del->next == NULL){
-            delete del;
-            return;
-        }
-       Node * temp = del->next;
-       del->next = temp->next;
-       del->data = temp->data;
-       delete temp;
-       
+void deleteNode(Node *del){
+    if(del->next == NULL){
+        delete del;
+        return;
     }
+   Node * temp = del->next;
+   del->next = temp->next;
+   del->data = temp->data;
+   delete temp;
+   
+}
 
-
+// -------------------------------- Reverse k nodes of linked list  ----------------------------------------- ///
 
 Node * reverseKNode(Node * &head, int k){
     Node *previous = NULL;
@@ -342,9 +522,12 @@ Node * reverseKNode(Node * &head, int k){
         current = nextnode;
         count++;
     }
+    head->next = reverseKNode(nextnode,k);
     return previous;
 }
 
+
+// -------------------------------- merge two sorted linked list ----------------------------------------- ///
 
 Node * mergeTwoSortedLL(Node*head1,Node*head2){
     Node* fh = NULL,*ft = NULL;
@@ -383,6 +566,9 @@ Node * mergeTwoSortedLL(Node*head1,Node*head2){
     }
     return fh;
 }
+
+
+// -------------------------------- Rotate a linked list ----------------------------------------- ///
 
 
 Node* RotateLL(Node *&head,int k){
@@ -425,6 +611,9 @@ Node* RemoveConsecutiveDuplicates(Node*head){
     return head;
 } 
 
+
+// -------------------------------- Detect cycle in a linked list ----------------------------------------- ///
+
 bool detectCycle(Node*&head){
     if(head == NULL || head->next==NULL){
             return false;
@@ -439,6 +628,8 @@ bool detectCycle(Node*&head){
         }
         return false;
 }
+
+// -------------------------------- Remove a cycle in linked list ----------------------------------------- ///
 
 void removeCycle(Node * &head){
     Node* slow = head;
@@ -457,6 +648,8 @@ void removeCycle(Node * &head){
 }
 
 
+
+
 void makeCycle(Node* &head,int pos){
     Node * temp =head,*startNode;
     int cnt = 1;
@@ -469,6 +662,10 @@ void makeCycle(Node* &head,int pos){
     }
     temp->next = startNode;
 }
+
+
+// -------------------------------- Finding node in a linked list  ----------------------------------------- ///
+
 
 int findNode(Node * head,int val){
     Node * temp = head;
@@ -483,6 +680,8 @@ int findNode(Node * head,int val){
     return -1;
 }
 
+
+// -------------------------------- Checking a linked list Palindrome or not ----------------------------------------- ///
 
 
 bool isPalindrome(Node *&head){
@@ -516,6 +715,8 @@ bool isPalindrome(Node *&head){
 }
 
 
+// -------------------------------- Printing a linked list  ----------------------------------------- ///
+
 
 void display(Node * head){
     Node* temp = head;
@@ -536,20 +737,22 @@ int main(){
     Node * head1 = NULL;
     Node * head2 = NULL;
     cout<<"Enter elements of head2"<<endl;
-    for(int i = 0;i<5;i++){
+    for(int i = 0;i<n;i++){
         cin>>d;
         insertAtTail(head1,d);
     }
-    cout<<"Enter elements of head2"<<endl;
-    for(int i = 0;i<4;i++){
-        cin>>d;
-        insertAtTail(head2,d);
-    }
+    display(head1);
+    // MoveHeadTail(head1);
+    // display(head1);
+    // cout<<"Enter elements of head2"<<endl;
+    // for(int i = 0;i<4;i++){
+    //     cin>>d;
+    //     insertAtTail(head2,d);
+    // }
     // insertAtHead(head,6);
     // insertAtSpecificPosition(head,99,3);
     // cout<<search(head,7)<<endl;
-    display(head1);
-    display(head2);
+    // display(head2);
     // cout<<"Length Of Linked List : "<<len_reccur(head);
     // insert_recursion(head,7,3);
     // cout<<"Reversed Linked List is : "<<endl;
@@ -569,8 +772,8 @@ int main(){
     // Node * new_head3 = RemoveConsecutiveDuplicates(head);
     // display(new_head3);
     // Node * new_head4 = reverseRecursive(head);
-    Node*new_head4 = mergeTwoSortedLL(head1,head2);
-    display(new_head4);
+    // Node*new_head4 = mergeTwoSortedLL(head1,head2);
+    // display(new_head4);
     return 0;
 
     
